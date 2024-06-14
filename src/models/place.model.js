@@ -14,6 +14,6 @@ const placeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'city'
   }
-})
+}, { versionKey: false })
 
 export const PlaceModel = mongoose.model('place', placeSchema)

@@ -10,6 +10,6 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'person'
   }
-})
+}, { versionKey: false })
 
 export const CommentModel = mongoose.model('comment', commentSchema)

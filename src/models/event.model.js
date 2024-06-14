@@ -24,6 +24,6 @@ const eventSchema = new Schema({
     _id: Schema.Types.ObjectId,
     ref: 'place'
   }
-})
+}, { versionKey: false })
 
 export const EventModel = mongoose.model('event', eventSchema)
