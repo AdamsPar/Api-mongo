@@ -22,6 +22,6 @@ const personSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'city'
   }
-})
+}, { versionKey: false })
 
 export const PersonModel = mongoose.model('person', personSchema)

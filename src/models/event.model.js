@@ -37,6 +37,6 @@ const eventSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'comment'
   }]
-})
+}, { versionKey: false })
 
 export const EventModel = mongoose.model('event', eventSchema)

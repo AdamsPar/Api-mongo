@@ -15,6 +15,6 @@ const commentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'event'
   }
-})
+}, { versionKey: false })
 
 export const CommentModel = mongoose.model('comment', commentSchema)

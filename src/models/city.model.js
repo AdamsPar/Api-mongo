@@ -14,6 +14,6 @@ const citySchema = new Schema({
     type: String,
     required: true
   }
-})
+}, { versionKey: false })
 
 export const CityModel = mongoose.model('city', citySchema)
