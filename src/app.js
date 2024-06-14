@@ -1,12 +1,14 @@
 import mongoose from 'mongoose'
 import express from 'express'
 import { CityRouter } from './routes/city.routes.js'
+import { CategoryRouter } from './routes/category.routes.js'
 
 const app = express()
 app.use(express.json())
 const url = 'mongodb://localhost/Eventos_poli'
 
 app.use(CityRouter)
+app.use(CategoryRouter)
 try {
   mongoose.connect(url)
   console.log('coneccion establecida con mongoDB')
