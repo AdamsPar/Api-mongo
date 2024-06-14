@@ -31,8 +31,11 @@ export class PersonController {
   deletePerson = async (req, res) => {
     try {
       const { id } = req.params
-      await PersonModel.deleteOne({ _id: id })
-      res.json({ message: 'City eliminated' })
+      const person = await PersonModel.deleteOne({ _id: id })
+      if (person.deletedCount) {
+        return res.json({ message: 'Person eliminated' })
+      }
+      return res.status(404).json({ message: 'Person not found' })
     } catch (error) {
       res.status(400).json({ message: 'Error deleting Person', error })
     }
@@ -51,7 +54,10 @@ export class PersonController {
     try {
       const { id } = req.params
       const person = await PersonModel.findById(id).populate('city')
-      res.json(person)
+      if (person) {
+        return res.json(person)
+      }
+      return res.status(404).json({ message: 'Person not found' })
     } catch (error) {
       res.status(400).json({ message: 'Error finding Person', error })
     }

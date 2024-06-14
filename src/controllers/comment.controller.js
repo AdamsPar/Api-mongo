@@ -42,8 +42,11 @@ export class CommentController {
   deleteComment = async (req, res) => {
     try {
       const { id } = req.params
-      await CommentModel.deleteOne({ _id: id })
-      res.json({ message: 'City eliminated' })
+      const comment = await CommentModel.deleteOne({ _id: id })
+      if (comment.deletedCount) {
+        return res.json({ message: 'comment eliminated' })
+      }
+      return res.status(404).json({ message: 'comment not found' })
     } catch (error) {
       res.status(400).json({ message: 'Error deleting comment', error })
     }
