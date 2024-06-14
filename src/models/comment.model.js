@@ -8,7 +8,12 @@ const commentSchema = new Schema({
   },
   person: {
     type: Schema.Types.ObjectId,
-    ref: 'person'
+    ref: 'person',
+    required: true
+  },
+  event: {
+    type: Schema.Types.ObjectId,
+    ref: 'event'
   }
 })
 

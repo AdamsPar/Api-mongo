@@ -1,11 +1,21 @@
 import { CommentModel } from '../models/comment.model.js'
+import { EventModel } from '../models/event.model.js'
 
 export class CommentController {
   createComment = async (req, res) => {
     try {
+      const { event } = req.body
+
+      const eventToUpdate = await EventModel.findById(event)
+      if (!eventToUpdate) {
+        return res.status(404).json({ message: 'Event not found, comment can\'t be realized' })
+      }
+
       const newComment = new CommentModel(req.body)
-      const comment = await newComment.save()
-      res.json(comment)
+      await newComment.save()
+
+      await EventModel.findByIdAndUpdate(event, { $push: { comment: newComment._id } })
+      return res.json(newComment)
     } catch (error) {
       res.status(400).json({ message: 'Error creating comment', error })
     }
@@ -23,6 +33,7 @@ export class CommentController {
         const updateComment = await CommentModel.findById(id).populate('person')
         return res.json(updateComment)
       }
+      return res.status(404).json({ message: 'Comment not found' })
     } catch (error) {
       res.status(400).json({ message: 'Error updating comment', error })
     }

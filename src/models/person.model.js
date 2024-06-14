@@ -18,10 +18,10 @@ const personSchema = new Schema({
     type: String,
     required: true
   },
-  city: [{
+  city: {
     type: Schema.Types.ObjectId,
     ref: 'city'
-  }]
+  }
 })
 
 export const PersonModel = mongoose.model('person', personSchema)

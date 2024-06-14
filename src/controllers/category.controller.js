@@ -23,6 +23,7 @@ export class CategoryController {
         const updatedCategory = await CategoryModel.findById(id)
         return res.json(updatedCategory)
       }
+      return res.status(404).json({ message: 'Event not found' })
     } catch (error) {
       res.status(400).json({ message: 'Error updating category', error })
     }
@@ -31,8 +32,11 @@ export class CategoryController {
   deleteCategory = async (req, res) => {
     try {
       const { id } = req.params
-      await CategoryModel.deleteOne({ _id: id })
-      res.json({ message: 'City eliminated' })
+      const category = await CategoryModel.deleteOne({ _id: id })
+      if (category.deletedCount) {
+        return res.json({ message: 'Category eliminated' })
+      }
+      return res.status(404).json({ message: 'Category not found' })
     } catch (error) {
       res.status(400).json({ message: 'Error deleting category', error })
     }
@@ -51,7 +55,10 @@ export class CategoryController {
     try {
       const { id } = req.params
       const category = await CategoryModel.findById(id)
-      res.json(category)
+      if (category) {
+        return res.json(category)
+      }
+      return res.status(404).json({ message: 'Category not found' })
     } catch (error) {
       res.status(400).json({ message: 'Error finding category', error })
     }
