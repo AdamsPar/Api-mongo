@@ -5,8 +5,8 @@ export const CommentRouter = Router()
 
 const commentController = new CommentController()
 
-CommentRouter.get('/api/city', commentController.getAllCity)
-CommentRouter.post('/api/city', commentController.createCity)
-CommentRouter.get('/api/city/:id', commentController.getCity)
-CommentRouter.delete('/api/city/:id', commentController.deleteCity)
-CommentRouter.put('/api/city/:id', commentController.updateCity)
+CommentRouter.get('/api/comment', commentController.getAllComment)
+CommentRouter.post('/api/comment', commentController.createComment)
+CommentRouter.get('/api/comment/:id', commentController.getComment)
+CommentRouter.delete('/api/comment/:id', commentController.deleteComment)
+CommentRouter.put('/api/comment/:id', commentController.updateComment)

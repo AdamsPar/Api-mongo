@@ -19,7 +19,11 @@ const eventSchema = new Schema({
   faculty: [{
     type: String,
     required: true
-  }]
+  }],
+  place: {
+    _id: Schema.Types.ObjectId,
+    ref: 'place'
+  }
 })
 
 export const EventModel = mongoose.model('event', eventSchema)

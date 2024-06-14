@@ -6,10 +6,10 @@ const commentSchema = new Schema({
     type: String,
     required: true
   },
-  user: [{
+  person: {
     type: Schema.Types.ObjectId,
     ref: 'person'
-  }]
+  }
 })
 
 export const CommentModel = mongoose.model('comment', commentSchema)
